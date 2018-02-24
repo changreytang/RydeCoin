@@ -1,0 +1,49 @@
+pseudo Code:
+Modifications:
+
+1. In operator --> transactionBuider, add a new attribute "metadata"
+2. 
+
+
+Addtions:
+
+1. Model for buying rydeCoins:
+
+In operator--> index.js,(As all the centralized actions are done by operator i.e creating wallet etc) new function to be defined:
+
+exchangeMoneyWithRydeCoin(walletId,fromAddressId,toAddressId,amount,changeAddressId,"exchange"){
+	
+	//assume exchange rate be =1;
+	//fromAdress-->miner
+	//toadress-->person requesting the money
+	    let utxo = this.blockchain.getUnspentTransactionsForAddress(fromAddressId);
+        let wallet = this.getWalletById(walletId);
+
+        if (wallet == null) throw new ArgumentError(`Wallet not found with id '${walletId}'`);
+
+        let secretKey = wallet.getSecretKeyByAddress(fromAddressId);
+
+        if (secretKey == null) throw new ArgumentError(`Secret key not found with Wallet id '${walletId}' and address '${fromAddressId}'`);
+
+        let tx = new TransactionBuilder();
+        tx.from(utxo);
+        tx.to(toAddressId, amount);
+        tx.change(changeAddressId || fromAddressId);
+        tx.fee(Config.FEE_PER_TRANSACTION);
+        tx.sign(secretKey);
+        tx.type="exchange";
+
+        return Transaction.fromJson(tx.build());
+   
+
+}
+
+
+2. Model for putting post about ride availablity
+
+In operator--> index.js,(As all the centralized actions are done by operator i.e creating wallet etc) new function to be defined:
+
+postRideAvailabilty(walletId,fromAdressId,toAdressId,amount,changeAdressId,"postRide",rideInfo){
+	
+	//rideifo --> has all the info to go into metadata
+}
