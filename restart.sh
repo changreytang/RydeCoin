@@ -13,5 +13,5 @@ if [[ -n "$node_num" ]]; then
     node bin/naivecoin.js -p 3003 --name 3 --peers http://localhost:3001 http://localhost:3002 &
   fi
 else
-  echo "USAGE: ./restart.sh [1|2|3]"
+  echo "USAGE: ./restart.sh [1|2|3|4|5]"
 fi
