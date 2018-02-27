@@ -521,6 +521,105 @@
                 }
             }
         },
+        "/operator/wallets/{walletId}/postRide": {
+            "post": {
+                "tags": [
+                    "operator"
+                ],
+                "summary": "Create a new ride post",
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "walletId",
+                        "description": "Wallet id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "password",
+                        "description": "Wallet password",
+                        "required": true,
+                        "type": "string",
+                        "format": "password"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Ride Post transaction to be created",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "fromAddress",
+                                "toAddress",
+                                "amount",
+                                "rideInfo"
+                            ],
+                            "properties": {
+                                "fromAddress": {
+                                    "type": "string",
+                                    "description": "From address"
+                                },
+                                "toAddress": {
+                                    "type": "string",
+                                    "description": "To address"
+                                },
+                                "amount": {
+                                    "type": "integer",
+                                    "description": "Amount (in satoshis)"
+                                },
+                                "changeAddress": {
+                                    "type": "string",
+                                    "description": "Change address"
+                                },
+                                "rideInfo": {
+                                    "description": "Ride description",
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "space": {
+                                                "type": "integer"
+                                            },
+                                            "dateOfJourney": {
+                                                "type": "string"
+                                            },
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "to": {
+                                                "type": "string"
+                                            },
+                                            "rideCost": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/node/peers": {
             "get": {
                 "tags": [
