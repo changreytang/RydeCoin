@@ -568,7 +568,7 @@
                                 },
                                 "amount": {
                                     "type": "integer",
-                                    "description": "Amount (in satoshis)"
+                                    "description": "Amount (in rydecoins)"
                                 },
                                 "changeAddress": {
                                     "type": "string",
@@ -604,6 +604,108 @@
                 "responses": {
                     "201": {
                         "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/operator/wallets/{walletId}/bookRide": {
+            "post": {
+                "tags": [
+                    "operator"
+                ],
+                "summary": "Book a ride",
+                "description": "This API enables the consumers to book a ride",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "walletId",
+                        "description": "Wallet id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "password",
+                        "description": "Wallet password",
+                        "required": true,
+                        "type": "string",
+                        "format": "password"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Transaction to be created for booking a ride",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "fromAddress",
+                                "toAddress",
+                                "amount",
+                                "rideInfo"
+                            ],
+                            "properties": {
+                                "fromAddress": {
+                                    "type": "string",
+                                    "description": "From address"
+                                },
+                                "toAddress": {
+                                    "type": "string",
+                                    "description": "To address"
+                                },
+                                "amount": {
+                                    "type": "integer",
+                                    "description": "Amount (in rydecoin)"
+                                },
+                                "changeAddress": {
+                                    "type": "string",
+                                    "description": "Change address"
+                                },
+                                "rideInfo": {
+                                    "description": "Ride description",
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "space": {
+                                                "type": "integer"
+                                            },
+                                            "dateOfJourney": {
+                                                "type": "string"
+                                            },
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "to": {
+                                                "type": "string"
+                                            },
+                                            "rideCost": {
+                                                "type": "integer"
+                                            },
+                                            "seatsAvailable": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created Booking transaction",
                         "schema": {
                             "$ref": "#/definitions/Transaction"
                         }
