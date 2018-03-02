@@ -9,6 +9,7 @@ block content
                 .level-right
                     .tags.has-addons
                         span.tag Type
+                        spant.tag.is-info Create Ride
                         span.tag.is-primary Regular
                         span.tag.is-warning Fee
                         span.tag.is-danger Reward
@@ -36,7 +37,7 @@ block content
                                     if block.index > 0
                                         each transaction in block.transactions                                       
                                             if transaction.data.inputs.length > 0 || transaction.data.outputs.length > 0
-                                                - var classByType = { 'regular': 'is-primary', 'fee': 'is-warning', 'reward': 'is-danger' }
+                                                - var classByType = { 'regular': 'is-primary', 'fee': 'is-warning', 'reward': 'is-danger', 'create_ride' : 'is-info' }
                                                 div.notification(class=`${classByType[transaction.type]}`)
                                                     p
                                                         if transaction.data.inputs.length > 0
