@@ -36,6 +36,26 @@
                 }
             }
         },
+        "/blockchain/appState": {
+            "get": {
+                "tags": [
+                    "blockchain"
+                ],
+                "summary": "Get the current state of Application",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Block"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/blockchain/blocks/{index}": {
             "get": {
                 "tags": [
