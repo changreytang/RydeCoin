@@ -698,6 +698,9 @@
                                     "schema": {
                                         "type": "object",
                                         "properties": {
+                                            "rideId": {
+                                                "type": "string"
+                                            },
                                             "space": {
                                                 "type": "integer"
                                             },
