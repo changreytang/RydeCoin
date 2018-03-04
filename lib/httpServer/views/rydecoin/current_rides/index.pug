@@ -1,3 +1,38 @@
 extends ../layout.pug
 
 block content
+	script.
+		$(document).ready(function(){
+			console.log("JQuery loaded..");
+			//Make ajax request
+			$.get( "/blockchain/appState", function( data ) {
+				console.log("Got data from server.."+data)
+				data.forEach(function(ride){
+					var ride_string = '<div class="card"><header class="card-header"><p class="card-header-title">';
+					//Title of card
+					ride_string += ride.from+' to '+ride.to
+					
+					ride_string += '</p> </header><div class="card-content"><div class="content">'
+					//Content of card
+					ride_string += 'DOJ- '+ride.dateOfJourney+'<br>'
+					ride_string += 'Cost- '+ride.rideCost+'<br>'
+					ride_string += 'Space left- '+(ride.space-ride.occupied)+'<br>'
+					ride_string += '</div></div>'
+
+					//Footer
+					ride_string += '<footer class="card-footer">'  
+					ride_string += '<a href="#" class="card-footer-item">Sign up</a>'
+					ride_string += '<a href="#" class="card-footer-item">Edit</a>'
+					ride_string += '<a href="#" class="card-footer-item">Delete</a>'
+					ride_string += '</footer></div><br><br>';
+					$( "#rides" ).append(ride_string);
+				});
+			});
+		});
+	.main.container
+		.row
+			.col-md-6.col-md-offset-3
+				h1.display-4.m-b-2 Current Rides
+				div#rides.column.is-half
+
+
