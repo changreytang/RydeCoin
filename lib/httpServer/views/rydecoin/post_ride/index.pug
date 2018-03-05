@@ -1,0 +1,36 @@
+extends ../layout.pug
+
+block content
+  .main.container
+     .row
+       .col-md-6.col-md-offset-3
+          h1 Post Ride
+          b #{message}
+
+           // register form
+          form(method='POST' action='/rydecoin/post_ride' required)
+            div.form-group
+              label Wallet ID: 
+              input.form-control(type='text' name='walletId' required)
+            div.form-group
+              label Password: 
+              input.form-control(type='password' name='password' required)
+            div.form-group
+              label Rydecoin Address: 
+              input.form-control(type='text' name='address' required)
+            div.form-group
+              label Date of Journey: 
+              input.form-control(type='date' name='dateOfJourney' required)
+            div.form-group
+              label Origin Location: 
+              input.form-control(type='text' name='from' required)
+            div.form-group
+              label Destination Location: 
+              input.form-control(type='text' name='to' required)
+            div.form-group
+              label Number of Open Spaces:
+              input.form-control(type='number' step="1" pattern="\d+" name='space' required)
+            div.form-group
+              label Price Per Space: $
+              input.form-control(type='number' step="1" pattern="\d+" name='rideCost' required)
+            button.btn.btn-primary(type='submit') Post Ride
