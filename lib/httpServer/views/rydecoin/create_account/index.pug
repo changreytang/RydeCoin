@@ -3,17 +3,18 @@ extends ../layout.pug
 block content
   .main.container
      .row
-        .col-md-6.col-md-offset-3
-           h1.display-4.m-b-2 Sign Up
+       .col-md-6.col-md-offset-3
+          h1 Sign Up
+          b #{message}
 
            // register form
-           form(method='POST' action='/rydecoin/create_account')
-             div.form-group
-               label(for='pw') Password:
-               input#pw.form-control(type='password' name='password')
-             div.form-group
-               label(for='pw2') Confirm Password:
-               input#pw2.form-control(type='password' name='confirmPassword')
-             button.btn.btn-primary(type='submit') Sign up
-  div Your Wallet ID is: #{walletId}
-  div Your Address is: #{address}
+          form(method='POST' action='/rydecoin/create_account')
+            div.form-group
+              label Password:
+              input.form-control(type='password' name='password')
+            div.form-group
+              label Confirm Password:
+              input.form-control(type='password' name='confirmPassword')
+            button.btn.btn-primary(type='submit') Sign up
+          div Your Wallet ID is: #{walletId}
+          div Your Address is: #{address}
