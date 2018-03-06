@@ -745,6 +745,72 @@
                 }
             }
         },
+        "/operator/wallets/{walletId}/finishRide": {
+            "post": {
+                "tags": [
+                    "operator"
+                ],
+                "summary": "Finishes a ride",
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "walletId",
+                        "description": "Wallet id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "password",
+                        "description": "Wallet password",
+                        "required": true,
+                        "type": "string",
+                        "format": "password"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Finishes a ride and refunds security",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "userAddress",
+                                "rideId"
+                            ],
+                            "properties": {
+                                "userAddress": {
+                                    "type": "string",
+                                    "description": "User address"
+                                },
+                                "rideId": {
+                                    "type": "string",
+                                    "description": "ID of the ride"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/node/peers": {
             "get": {
                 "tags": [
