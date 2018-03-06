@@ -21,7 +21,8 @@ block content
 
 					//Footer
 					ride_string += '<footer class="card-footer">'
-					ride_string += '<a href="#" class="card-footer-item">Sign up</a>'
+					//presently we are supporting single ride booking
+					ride_string += '<a href="/rydecoin/book_ride/'+ride.rideId+'" class="card-footer-item">Book A Ride</a>'
 					ride_string += '<a href="#" class="card-footer-item">Edit</a>'
 					ride_string += '<a href="#" class="card-footer-item">Delete</a>'
 					ride_string += '</footer></div><br><br>';
