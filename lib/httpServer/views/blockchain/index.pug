@@ -11,6 +11,7 @@ block content
                         span.tag Type
                         spant.tag.is-info Create Ride
                         span.tag.is-prim Book Ride
+                        span.tag.is-purple Finish Ride
                         span.tag.is-primary Regular
                         span.tag.is-warning Fee
                         span.tag.is-danger Reward
@@ -38,7 +39,7 @@ block content
                                     if block.index > 0
                                         each transaction in block.transactions                                       
                                             if transaction.data.inputs.length > 0 || transaction.data.outputs.length > 0
-                                                - var classByType = { 'regular': 'is-primary', 'fee': 'is-warning', 'reward': 'is-danger', 'create_ride' : 'is-info', 'book_ride':'is-prim'}
+                                                - var classByType = { 'regular': 'is-primary', 'fee': 'is-warning', 'reward': 'is-danger', 'create_ride' : 'is-info', 'book_ride':'is-prim', 'finish_ride':'is-purple'}
                                                 div.notification(class=`${classByType[transaction.type]}`)
                                                     p
                                                         if transaction.data.inputs.length > 0
