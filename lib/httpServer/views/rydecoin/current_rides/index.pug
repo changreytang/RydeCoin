@@ -2,14 +2,19 @@ extends ../layout.pug
 
 block content
 	script.
-		function submitForm(rideId,amount) {
-				alert("yo.."+rideId+".."+amount);
+		function submitForm(type,rideId,amount) {
+				alert("debugging.."+rideId+".."+amount+"..."+type);
 				document.getElementById("rideId").value = rideId;
 				document.getElementById("amount").value = amount;
+				if(type=="book_ride"){
+					document.getElementById("dataCollect").action="/rydecoin/book_ride/";
+				}else{
+					document.getElementById("dataCollect").action="/rydecoin/finish_ride/";
+				}
 				document.getElementById("submitButton").click();
 			}
 		$(document).ready(function(){
-			console.log("JQuery loaded..");
+			//console.log("JQuery loaded..");
 			//Make ajax request
 			$.get( "/blockchain/appState", function( data ) {
 				console.log("Got data from server.."+data)
@@ -28,9 +33,11 @@ block content
 					//Footer
 					ride_string += '<footer class="card-footer">'
 					//presently we are supporting single ride booking
-					ride_string += '<button onclick="submitForm(\'' + ride.rideId + '\',\'' + ride.rideCost + '\')" class="card-footer-item">Book A Ride</button>'
-					ride_string += '<a href="#" class="card-footer-item">Edit</a>'
-					ride_string += '<a href="#" class="card-footer-item">Delete</a>'
+					ride_string += '<button onclick="submitForm(\'book_ride\',\'' + ride.rideId + '\',\'' + ride.rideCost + '\')" class="card-footer-item">Book A Ride</button>'
+					ride_string += '<button onclick="submitForm(\'finish_ride\',\'' + ride.rideId + '\',\'' + ride.rideCost + '\')" class="card-footer-item">Finised Ride</button>'
+					ride_string += '<button onclick="submitForm(\'conflict\',\'' + ride.rideId + '\',\'' + ride.rideCost + '\')" class="card-footer-item">Conflict</button>'
+					//ride_string += '<a href="#" class="card-footer-item">Edit</a>'
+					//ride_string += '<a href="#" class="card-footer-item">Delete</a>'
 					ride_string += '</footer></div><br><br>';
 					$( "#rides" ).append(ride_string);
 				});
@@ -41,7 +48,7 @@ block content
 			.col-md-6.col-md-offset-3
 				h1.display-4.m-b-2 Current Rides
 				
-				form(method='POST' action='/rydecoin/book_ride/')
+				form(method='POST' id='dataCollect')
 					div.form-group
 						label Wallet ID:
 						input.form-control(type='text' name='walletId' required)
