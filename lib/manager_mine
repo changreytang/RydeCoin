@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require 'net/http'
+require 'uri'
+require 'json'
+
+raise 'USAGE: ./manager_mine host port address' unless ARGV.length == 3
+
+host = ARGV[0]
+port = ARGV[1]
+address = ARGV[2]
+
+header = {'Content-Type': 'application/json'}
+body = {
+         rewardAddress: address,
+         feeAddress: address
+       }
+
+uri = URI.parse("http://#{host}:#{port}/miner/mine")
+http = Net::HTTP.new(uri.host, uri.port)
+request = Net::HTTP::Post.new(uri.request_uri, header)
+request.body = body.to_json
+
+ # Send the request
+while true
+  sleep_time = rand(10..20)
+  puts "I will sleep for #{sleep_time}"
+  sleep sleep_time
+  response = http.request(request)
+  puts response.message
+end
+
